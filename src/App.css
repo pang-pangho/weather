@@ -1,38 +1,19 @@
-.App {
-  text-align: center;
+body {
+  background: url(https://image.cdn2.seaart.ai/2023-06-25/38311547863109/57461105dda71493e6a569738d1db53ed2b8f92d_high.webp);
+  height: 100vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  /* flex-direction: column : display flex로 인해 한 줄로 된 컨텐츠들의 방향 설정   */
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.weather-box {
+  border: 3px solid rgb(85, 246, 252);
+  border-radius: 15px;
+  background-color: blanchedalmond;
+  padding: 50px;
 }
