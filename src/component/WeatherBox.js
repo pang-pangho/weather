@@ -1,8 +1,7 @@
 import React from "react";
 
 const WeatherBox = ({ weather }) => {
-  const Fahrenheit = weather && weather.main.temp * 1.8 + 32;
-  console.log(weather);
+  const Fahrenheit = weather && (weather.main.temp * 1.8 + 32).toFixed(1);
   return (
     <div className="weather-box">
       <div>{weather && weather.name}</div>
