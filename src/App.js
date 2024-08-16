@@ -3,35 +3,55 @@ import "./App.css";
 import WeatherBox from "./component/WeatherBox";
 import WeatherButton from "./component/WeatherButton";
 import ClipLoader from "react-spinners/ClipLoader";
+
 function App() {
   const [weather, setWeather] = useState(null);
   const [city, setCity] = useState("");
   const cities = ["paris", "new york", "tokyo", "seoul"];
   const [loading, setLoading] = useState(false);
+
   const getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       let lat = position.coords.latitude;
       let lon = position.coords.longitude;
-      getWeatherByCorrentLocation(lat, lon);
+      getWeatherByCurrentLocation(lat, lon);
     });
   };
 
-  const getWeatherByCorrentLocation = async (lat, lon) => {
-    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=9909cc7187220b5962402b179b5e12fa&units=metric`;
-    setLoading(true);
-    let response = await fetch(url);
-    let data = await response.json();
-    setWeather(data);
-    setLoading(false);
+  const getWeatherByCurrentLocation = async (lat, lon) => {
+    try {
+      setLoading(true);
+      let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=9909cc7187220b5962402b179b5e12fa&units=metric`;
+      let response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Error status: ${response.status}`);
+      }
+      let data = await response.json();
+      setWeather(data);
+    } catch (error) {
+      console.error("에러 발생:", error);
+    } finally {
+      setLoading(false);
+    }
   };
+
   const getWeatherByCity = async () => {
-    setLoading(true);
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=9909cc7187220b5962402b179b5e12fa&units=metric`;
-    let response = await fetch(url);
-    let data = await response.json();
-    setWeather(data);
-    setLoading(false);
+    try {
+      setLoading(true);
+      let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=9909cc7187220b5962402b179b5e12fa&units=metric`;
+      let response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Error status: ${response.status}`);
+      }
+      let data = await response.json();
+      setWeather(data);
+    } catch (error) {
+      console.error("에러 발생:", error);
+    } finally {
+      setLoading(false);
+    }
   };
+
   useEffect(() => {
     if (city === "") {
       getCurrentLocation();
